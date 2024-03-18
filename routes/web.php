@@ -13,6 +13,6 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->group(['prefix' => 'api/'], function ($router) {
+    $router->post('login', 'LoginController@check');
 });

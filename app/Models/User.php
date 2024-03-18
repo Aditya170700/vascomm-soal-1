@@ -14,6 +14,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable, HasFactory;
 
     /**
+     * Role admin
+     */
+    const ADMIN = 'Admin';
+
+    /**
+     * Role user
+     */
+    const USER = 'User';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]
@@ -29,5 +39,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = [
         'password',
+        'api_token',
     ];
 }
