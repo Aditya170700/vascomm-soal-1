@@ -19,6 +19,13 @@ $router->group(['prefix' => 'api/'], function ($router) {
     $router->group(['middleware' => 'auth'], function ($router) {
         $router->group(['prefix' => 'users/'], function ($router) {
             $router->get('profile', 'UserController@profile');
+
+            $router->group(['middleware' => 'role:admin'], function ($router) {
+                $router->get('/', 'UserController@index');
+                $router->post('/', 'UserController@store');
+                $router->put('/{id}/update', 'UserController@update');
+                $router->delete('/{id}', 'UserController@destroy');
+            });
         });
     });
 });
