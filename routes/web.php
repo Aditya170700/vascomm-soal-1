@@ -27,5 +27,12 @@ $router->group(['prefix' => 'api/'], function ($router) {
                 $router->delete('/{id}', 'UserController@destroy');
             });
         });
+
+        $router->group(['prefix' => 'products/', 'middleware' => 'role:admin'], function ($router) {
+            $router->get('/', 'ProductController@index');
+            $router->post('/', 'ProductController@store');
+            $router->put('/{id}/update', 'ProductController@update');
+            $router->delete('/{id}', 'ProductController@destroy');
+        });
     });
 });
