@@ -28,11 +28,12 @@ class LoginController extends Controller
             $user = User::where('email', $request->email)->first();
 
             if (Hash::check($request->password, $user->password)) {
-                $this->data = [
-                    'api_token' => Str::random(255),
-                ];
+                $user->api_token = Str::random(255);
+                $user->save();
 
-                $user->update($this->data);
+                $this->data = [
+                    'api_token' => $user->api_token,
+                ];
             } else {
                 $this->code = 401;
                 $this->message = 'Credential doesn\'t match';

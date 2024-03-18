@@ -15,4 +15,10 @@
 
 $router->group(['prefix' => 'api/'], function ($router) {
     $router->post('login', 'LoginController@check');
+
+    $router->group(['middleware' => 'auth'], function ($router) {
+        $router->group(['prefix' => 'users/'], function ($router) {
+            $router->get('profile', 'UserController@profile');
+        });
+    });
 });
